@@ -11,35 +11,40 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements userinterface
 {
     /**
-     * @orm\id()
-     * @orm\generatedvalue()
-     * @orm\column(type="integer")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private int $id;
 
     /**
-     * @orm\column(type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
     private string $username;
 
     /**
-     * @orm\column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string
      */
     private string $nickname;
 
     /**
-     * @orm\column(type="string", length=64)
+     * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
     private string $password;
 
     /**
-     * @orm\column(type="json")
+     * @var string
+     */
+    private string $plainPassword;
+
+    /**
+     * @ORM\Column(type="json")
      *
      * @var array
      */
@@ -48,7 +53,7 @@ class User implements userinterface
     /**
      * @return int|null
      */
-    public function getid(): ?int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -56,7 +61,7 @@ class User implements userinterface
     /**
      * @return string
      */
-    public function getusername(): string
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -66,7 +71,7 @@ class User implements userinterface
      *
      * @return $this
      */
-    public function setusername(string $username): self
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
@@ -76,11 +81,11 @@ class User implements userinterface
     /**
      * @inheritdoc
      */
-    public function getroles()
+    public function getRoles()
     {
         $roles = $this->roles;
         // guarantee every user at least has role_user
-        $roles[] = 'role_user';
+        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -88,12 +93,47 @@ class User implements userinterface
     /**
      * @return string
      */
-    public function getpassword(): string
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function getNickname()
+    /**
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword(string $password): User
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     *
+     * @return User
+     */
+    public function setPlainPassword(string $plainPassword): User
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNickname(): string
     {
         return $this->nickname;
     }
@@ -101,9 +141,9 @@ class User implements userinterface
     /**
      * @param string $nickname
      *
-     * @return $this
+     * @return User
      */
-    public function setNickname(string $nickname): self
+    public function setNickname(string $nickname): User
     {
         $this->nickname = $nickname;
 
@@ -111,9 +151,9 @@ class User implements userinterface
     }
 
     /**
-     * @inheritdoc
+     * @return string|null
      */
-    public function getsalt()
+    public function getSalt(): ?string
     {
         return null;
     }
@@ -121,7 +161,7 @@ class User implements userinterface
     /**
      * @inheritdoc
      */
-    public function erasecredentials()
+    public function eraseCredentials(): void
     {
     }
 }
