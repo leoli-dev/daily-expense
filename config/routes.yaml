@@ -2,6 +2,6 @@ app_login:
     path: /login
     controller: App\Controller\SecurityController::login
 
-app_homepage:
+app_dashboard:
     path: /
-    controller: App\Controller\DefaultController::homepage
+    controller: App\Controller\DashboardController::view

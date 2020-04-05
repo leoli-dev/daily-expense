@@ -19,6 +19,6 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-pro": "^5.12.1"
+        "startbootstrap-sb-admin-2": "^4.0.7"
     }
 }

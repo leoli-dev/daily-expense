@@ -10,7 +10,7 @@
     {{ parent() }} | Sign in
 {% endblock %}
 
-{% block body %}
+{% block main %}
     <div class="text-center">
         <form class="form-signin" method="post">
             {% if error %}
@@ -18,7 +18,7 @@
                     {{ error.messageKey|trans(error.messageData, 'security') }}
                 </div>
             {% endif %}
-            <img class="img-logo" src="{{ asset('build/images/logo.svg') }}" alt="logo">
+            {% include 'partials/_logo.svg.twig' %}
             <h1 class="h1 mb-3 font-weight-normal">Daily Expense</h1>
             <label for="inputUsername" class="sr-only">Username</label>
             <input type="text" id="inputUsername" class="form-control" name="username"

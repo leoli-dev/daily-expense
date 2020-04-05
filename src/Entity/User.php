@@ -10,6 +10,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements userinterface
 {
+    public const DEFAULT_ROLE = 'ROLE_USER';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -48,7 +50,7 @@ class User implements userinterface
      *
      * @var array
      */
-    private array $roles = [];
+    private array $roles = [self::DEFAULT_ROLE];
 
     /**
      * @return int|null
@@ -83,11 +85,7 @@ class User implements userinterface
      */
     public function getRoles()
     {
-        $roles = $this->roles;
-        // guarantee every user at least has role_user
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     /**

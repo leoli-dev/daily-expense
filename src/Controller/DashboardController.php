@@ -5,10 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends AbstractController
+class DashboardController extends AbstractController
 {
-    public function homepage()
+    public function view(): Response
     {
-        return new Response('Homepage');
+        return $this->render('pages/dashboard.html.twig');
     }
 }
