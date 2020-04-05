@@ -13,7 +13,10 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
-    <body {% if bodyId is defined %}id="{{ bodyId }}"{% endif %}>
+    <body
+        {% if bodyId is defined %}id="{{ bodyId }}"{% endif %}
+        {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}
+    >
         {% block main %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

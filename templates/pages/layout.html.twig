@@ -1,3 +1,8 @@
+{% set bodyId = 'page-top' %}
+{% if isSidebarToggled() %}
+    {% set bodyClass = 'sidebar-toggled' %}
+{% endif %}
+
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}

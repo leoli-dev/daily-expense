@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion {% if isSidebarToggled() %}toggled{% endif %}" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -62,6 +62,7 @@
         </div>
     </li>
 
+    {#
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -104,6 +105,7 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span></a>
     </li>
+    #}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
