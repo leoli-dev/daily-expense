@@ -29,9 +29,9 @@ class User implements userinterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @var string
+     * @var string|null
      */
-    private string $nickname;
+    private ?string $nickname;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -137,11 +137,11 @@ class User implements userinterface
     }
 
     /**
-     * @param string $nickname
+     * @param string|null $nickname
      *
      * @return User
      */
-    public function setNickname(string $nickname): User
+    public function setNickname(?string $nickname): User
     {
         $this->nickname = $nickname;
 

@@ -19,9 +19,9 @@ trait ModificationTrait
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="modified_by_id", referencedColumnName="id")
      *
-     * @var User
+     * @var User|null
      */
-    protected User $modifiedBy;
+    protected ?User $modifiedBy;
 
     /**
      * @return \DateTimeImmutable|null
@@ -32,11 +32,11 @@ trait ModificationTrait
     }
 
     /**
-     * @param \DateTimeImmutable $modifiedAt
+     * @param \DateTimeImmutable|null $modifiedAt
      *
      * @return $this
      */
-    public function setModifiedAt(\DateTimeImmutable $modifiedAt): self
+    public function setModifiedAt(?\DateTimeImmutable $modifiedAt): self
     {
         $this->modifiedAt = $modifiedAt;
 
@@ -52,11 +52,11 @@ trait ModificationTrait
     }
 
     /**
-     * @param User $modifiedBy
+     * @param User|null $modifiedBy
      *
      * @return $this
      */
-    public function setModifiedBy(User $modifiedBy): self
+    public function setModifiedBy(?User $modifiedBy): self
     {
         $this->modifiedBy = $modifiedBy;
 
