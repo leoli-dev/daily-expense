@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class Owner
+class Account
 {
     use CreationTrait;
     use ModificationTrait;
@@ -29,16 +29,9 @@ class Owner
     private string $name;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @var string|null
-     */
-    private ?string $icon;
-
-    /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -46,7 +39,7 @@ class Owner
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName():string
     {
         return $this->name;
     }
@@ -54,31 +47,11 @@ class Owner
     /**
      * @param string $name
      *
-     * @return Owner
+     * @return Account
      */
-    public function setName(string $name): Owner
+    public function setName(string $name): Account
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    /**
-     * @param string|null $icon
-     *
-     * @return Owner
-     */
-    public function setIcon(?string $icon): Owner
-    {
-        $this->icon = $icon;
 
         return $this;
     }

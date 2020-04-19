@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\CreationTrait;
+use App\Entity\Traits\ModificationTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -10,6 +12,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Category
 {
+    use CreationTrait;
+    use ModificationTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
