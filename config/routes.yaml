@@ -5,3 +5,19 @@ app_login:
 app_dashboard:
     path: /
     controller: App\Controller\DashboardController::view
+
+app_records:
+    path: /records
+    controller: App\Controller\EntityController::records
+
+app_entity_categories:
+    path: /entity/categories
+    controller: App\Controller\EntityController::categories
+
+app_entity_accounts:
+    path: /entity/accounts
+    controller: App\Controller\EntityController::accounts
+
+app_entity_owners:
+    path: /entity/owners
+    controller: App\Controller\EntityController::owners
