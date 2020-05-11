@@ -29,6 +29,14 @@ class Account
     private string $name;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Currency")
+     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id")
+     *
+     * @var Currency
+     */
+    private Currency $currency;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -52,6 +60,26 @@ class Account
     public function setName(string $name): Account
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Currency
+     */
+    public function getCurrency(): Currency
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param Currency $currency
+     *
+     * @return Account
+     */
+    public function setCurrency(Currency $currency): Account
+    {
+        $this->currency = $currency;
 
         return $this;
     }
