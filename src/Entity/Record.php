@@ -23,7 +23,6 @@ class Record
         'transfer'  => self::FLOW_TYPE_TRANSFER,
     ];
 
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -44,6 +43,20 @@ class Record
      * @var int
      */
     private int $flowType;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     *
+     * @var \DateTimeImmutable
+     */
+    private \DateTimeImmutable $happenedAt;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    private string $description;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category")
@@ -119,6 +132,46 @@ class Record
         }
 
         $this->flowType = $flowType;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getHappenedAt(): \DateTimeImmutable
+    {
+        return $this->happenedAt;
+    }
+
+    /**
+     * @param \DateTimeImmutable $happenedAt
+     *
+     * @return Record
+     */
+    public function setHappenedAt(\DateTimeImmutable $happenedAt): Record
+    {
+        $this->happenedAt = $happenedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return Record
+     */
+    public function setDescription(string $description): Record
+    {
+        $this->description = $description;
 
         return $this;
     }
