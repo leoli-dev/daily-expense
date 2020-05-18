@@ -21,3 +21,7 @@ app_entity_accounts:
 app_entity_owners:
     path: /entity/owners
     controller: App\Controller\EntityController::owners
+
+app_entity_currencies:
+    path: /entity/currencies
+    controller: App\Controller\EntityController::currencies

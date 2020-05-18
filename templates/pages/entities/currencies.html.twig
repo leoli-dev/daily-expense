@@ -1,0 +1,32 @@
+{% set pageTitle = 'Currencies' %}
+{% set sidebarActiveTag = 'currencies' %}
+
+{% extends 'pages/layout.html.twig' %}
+
+{% block pageContent %}
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Symbol</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for currency in currencies %}
+                        <tr>
+                            <td>{{ currency.name }}</td>
+                            <td>{{ currency.code }}</td>
+                            <td>{{ currency.symbol }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

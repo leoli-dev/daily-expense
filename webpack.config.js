@@ -24,15 +24,18 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    .addEntry('login', './assets/css/pages/login.scss')
+    .addEntry('pages/login', './assets/css/pages/login.scss')
+    .addEntry('pages/entities/accounts', './assets/js/pages/entities/accounts.js')
 
     /*
      * Copy js dependencies libraries
      */
     .addEntry('vendors/css/fontawesome', './node_modules/@fortawesome/fontawesome-free/css/all.min.css')
     .addEntry('vendors/css/sb-admin-2', './node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css')
+    .addEntry('vendors/css/datatables', './node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css')
     .addEntry('vendors/js/jquery.easing', './node_modules/jquery.easing/jquery.easing.min.js')
     .addEntry('vendors/js/sb-admin-2', './node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.min.js')
+    .addEntry('vendors/js/datatables', './node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

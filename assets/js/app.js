@@ -17,9 +17,13 @@ const SESSION_KEY_SIDEBAR_TOGGLED = 'SIDEBAR_TOGGLED';
 $(document).ready(function() {
     // $('[data-toggle="popover"]').popover();
 
+    // Side bar toggle
     const $sidebar = $('#accordionSidebar');
     const $sidebarToggle = $('#sidebarToggle');
     $sidebarToggle.click(() => {
         Cookies.set(SESSION_KEY_SIDEBAR_TOGGLED, $sidebar.hasClass('toggled') ? 1 : 0);
     });
+
+    // General DataTable
+    $('#dataTable').DataTable();
 });

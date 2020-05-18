@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Currency;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,5 +38,21 @@ class EntityController extends AbstractController
     public function records(): Response
     {
         return $this->render('pages/entities/records.html.twig');
+    }
+
+    /**
+     * @return Response
+     */
+    public function currencies(): Response
+    {
+        $currencyRepo = $this->getDoctrine()->getRepository(Currency::class);
+        $currencies = $currencyRepo->findAll();
+
+        return $this->render(
+            'pages/entities/currencies.html.twig',
+            [
+                'currencies' => $currencies,
+            ]
+        );
     }
 }

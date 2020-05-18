@@ -40,6 +40,7 @@
     {% if sidebarActiveTag == 'categories'
         or sidebarActiveTag == 'accounts'
         or sidebarActiveTag == 'owners'
+        or sidebarActiveTag == 'currencies'
     %}
         active
     {% endif %}
@@ -51,13 +52,17 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {% if sidebarActiveTag == 'accounts' %}active{% endif %}"
+                   href="{{ path('app_entity_accounts') }}">
+                    Accounts
+                </a>
                 <a class="collapse-item {% if sidebarActiveTag == 'categories' %}active{% endif %}"
                    href="{{ path('app_entity_categories') }}">
                     Categories
                 </a>
-                <a class="collapse-item {% if sidebarActiveTag == 'accounts' %}active{% endif %}"
-                   href="{{ path('app_entity_accounts') }}">
-                    Accounts
+                <a class="collapse-item {% if sidebarActiveTag == 'currencies' %}active{% endif %}"
+                   href="{{ path('app_entity_currencies') }}">
+                    Currencies
                 </a>
                 <a class="collapse-item {% if sidebarActiveTag == 'owners' %}active{% endif %}"
                    href="{{ path('app_entity_owners') }}">
