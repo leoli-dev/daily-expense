@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Account;
 use App\Entity\Currency;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,15 @@ class EntityController extends AbstractController
      */
     public function accounts(): Response
     {
-        return $this->render('pages/entities/accounts.html.twig');
+        $accountRepo = $this->getDoctrine()->getRepository(Account::class);
+        $accounts = $accountRepo->findAll();
+
+        return $this->render(
+            'pages/entities/accounts.html.twig',
+            [
+                'accounts' => $accounts,
+            ]
+        );
     }
 
     /**

@@ -24,9 +24,45 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
             ->setCreatedAt(new \DateTimeImmutable())
             ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
 
+        $usdCash = new Account();
+        $usdCash
+            ->setName('USD cash')
+            ->setCurrency($this->getReference(CurrencyFixtures::USD))
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+
+        $eurCash = new Account();
+        $eurCash
+            ->setName('EUR cash')
+            ->setCurrency($this->getReference(CurrencyFixtures::EUR))
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+
+        $hkdCash = new Account();
+        $hkdCash
+            ->setName('HKD cash')
+            ->setCurrency($this->getReference(CurrencyFixtures::HKD))
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+
+        $cnyCash = new Account();
+        $cnyCash
+            ->setName('CNY cash')
+            ->setCurrency($this->getReference(CurrencyFixtures::CNY))
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+
         $manager->persist($cadCash);
+        $manager->persist($usdCash);
+        $manager->persist($eurCash);
+        $manager->persist($hkdCash);
+        $manager->persist($cnyCash);
         $manager->flush();
         $this->setReference(self::CASH_CAD, $cadCash);
+        $this->setReference(self::CASH_USD, $usdCash);
+        $this->setReference(self::CASH_EUR, $eurCash);
+        $this->setReference(self::CASH_HKD, $hkdCash);
+        $this->setReference(self::CASH_CNY, $cnyCash);
     }
 
     /**

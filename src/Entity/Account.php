@@ -7,7 +7,7 @@ use App\Entity\Traits\ModificationTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\AccountRepository")
  */
 class Account
 {
