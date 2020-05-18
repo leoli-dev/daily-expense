@@ -69,7 +69,7 @@ docker-compose exec engine yarn watch
 - Backup database structure with data:
 
     ```bash
-    php bin/console backup-manager:backup daily_expense local -c gzip
+    docker-compose exec php bin/console backup-manager:backup daily_expense local -c gzip
     ```
 
     When the command finish, you can file a backup file in the path: `./data/db_backup/{DATE}_{TIME}.gz`
@@ -77,5 +77,5 @@ docker-compose exec engine yarn watch
 - Restore the database from backup file:
 
     ```bash
-    php bin/console backup-manager:restore daily_expense local {BACKUP_FILE_PATH} -c gzip
+    docker-compose exec php bin/console backup-manager:restore daily_expense local {BACKUP_FILE_PATH} -c gzip
     ```
