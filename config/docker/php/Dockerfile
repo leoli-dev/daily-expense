@@ -15,7 +15,9 @@ RUN apt-get install -y \
         zlib1g-dev \
         libmcrypt-dev \
         sudo \
-        unzip
+        unzip \
+        default-mysql-client \
+        default-libmysqlclient-dev
 
 RUN docker-php-ext-install \
         opcache \

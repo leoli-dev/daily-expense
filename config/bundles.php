@@ -14,4 +14,5 @@ return [
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
+    BM\BackupManagerBundle\BMBackupManagerBundle::class => ['all' => true],
 ];

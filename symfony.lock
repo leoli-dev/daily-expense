@@ -1,4 +1,19 @@
 {
+    "backup-manager/backup-manager": {
+        "version": "3.0.1"
+    },
+    "backup-manager/symfony": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.1",
+            "ref": "ae7e2e6cebb46c0adede771d3d9b8c540879920c"
+        },
+        "files": [
+            "config/packages/bm_backup_manager.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -105,11 +120,17 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.3"
     },
+    "league/flysystem": {
+        "version": "1.0.68"
+    },
     "monolog/monolog": {
         "version": "2.0.2"
     },
     "nikic/php-parser": {
         "version": "v4.4.0"
+    },
+    "nyholm/dsn": {
+        "version": "1.0.0"
     },
     "ocramius/package-versions": {
         "version": "1.8.0"
@@ -295,6 +316,9 @@
     },
     "symfony/polyfill-php73": {
         "version": "v1.17.0"
+    },
+    "symfony/process": {
+        "version": "v5.0.8"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.4"

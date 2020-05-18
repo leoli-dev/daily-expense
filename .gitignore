@@ -11,7 +11,8 @@
 
 ###> docker
 docker-compose.yml
-/data/mysql
+/data/db_backup
+/data/db_storage
 ###< docker
 
 ###> symfony/webpack-encore-bundle ###

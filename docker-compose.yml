@@ -13,7 +13,7 @@ services:
         working_dir: /var/www
         depends_on:
             - php
-            - mysql
+            - db
 
     php:
         build: ./config/docker/php/
@@ -23,16 +23,16 @@ services:
             - .:/var/www:cached
         working_dir: /var/www
 
-    mysql:
-        image: mysql:latest
-        container_name: mysql
+    db:
+        image: mariadb:latest
+        container_name: db
         restart: always
         environment:
-            MYSQL_DATABASE: db
+            MYSQL_DATABASE: daily_expense
             MYSQL_USER: user
             MYSQL_PASSWORD: password
             MYSQL_ROOT_PASSWORD: password
         ports:
             - 8091:3306
         volumes:
-            - ./data/mysql:/var/lib/mysql
+            - ./data/db_storage:/var/lib/mysql
