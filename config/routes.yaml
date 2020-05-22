@@ -1,27 +1,51 @@
+#####################
+# Security
+#####################
 app_login:
     path: /login
     controller: App\Controller\SecurityController::login
 
+#####################
+# Pages
+#####################
 app_dashboard:
     path: /
     controller: App\Controller\DashboardController::view
+    methods: GET
 
 app_records:
     path: /records
     controller: App\Controller\EntityController::records
+    methods: GET
 
 app_entity_categories:
     path: /entity/categories
     controller: App\Controller\EntityController::categories
+    methods: GET
 
 app_entity_accounts:
     path: /entity/accounts
     controller: App\Controller\EntityController::accounts
+    methods: GET
 
 app_entity_owners:
     path: /entity/owners
     controller: App\Controller\EntityController::owners
+    methods: GET
 
 app_entity_currencies:
     path: /entity/currencies
     controller: App\Controller\EntityController::currencies
+    methods: GET
+
+#####################
+# APIs
+#####################
+app_api_get_currency:
+    path: /api/currency/{id}
+    controller: App\Controller\ApiController::getCurrency
+    methods: GET
+    requirements:
+        id: '\d+'
+    options:
+        expose: true

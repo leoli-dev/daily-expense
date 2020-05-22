@@ -94,6 +94,8 @@
 {% block javascripts %}
     {{ parent() }}
 
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     {{ encore_entry_script_tags('vendors/js/jquery.easing') }}
     {{ encore_entry_script_tags('vendors/js/sb-admin-2') }}
     {{ encore_entry_script_tags('vendors/js/datatables') }}

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class Currency
+class Currency implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -103,5 +103,18 @@ class Currency
         $this->symbol = $symbol;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'code' => $this->code,
+            'symbol' => $this->symbol,
+        ];
     }
 }

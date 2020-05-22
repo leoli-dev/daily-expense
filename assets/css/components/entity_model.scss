@@ -1,0 +1,17 @@
+#entityModal {
+    &.loading {
+        .modal-body {
+            &> div {
+                display: none;
+
+                &.form-spinner {
+                    display: flex !important;
+                }
+            }
+        }
+    }
+
+    .form-spinner.d-flex {
+        display: none !important;
+    }
+}
