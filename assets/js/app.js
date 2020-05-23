@@ -23,7 +23,4 @@ $(document).ready(function() {
     $sidebarToggle.click(() => {
         Cookies.set(SESSION_KEY_SIDEBAR_TOGGLED, $sidebar.hasClass('toggled') ? 1 : 0);
     });
-
-    // General DataTable
-    $('#dataTable').DataTable();
 });

@@ -22,11 +22,13 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                         Close
                     </button>
-                    {% block formSubmitButton %}
-                        <button type="submit" class="btn btn-primary">
-                            Submit
-                        </button>
-                    {% endblock %}
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                    <button id="submitLoadingPlaceholder" class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                    </button>
                 </div>
             </div>
         </div>

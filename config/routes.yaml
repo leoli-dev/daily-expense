@@ -43,9 +43,19 @@ app_entity_currencies:
 #####################
 app_api_get_currency:
     path: /api/currency/{id}
-    controller: App\Controller\ApiController::getCurrency
+    controller: App\Controller\Api\CurrencyController::fetch
     methods: GET
     requirements:
         id: '\d+'
     options:
         expose: true
+
+app_api_update_currency:
+    path: /api/currency/{id}
+    controller: App\Controller\Api\CurrencyController::update
+    methods: PUT
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+
