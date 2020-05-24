@@ -44,13 +44,7 @@ $('document').ready(() => {
                         error,
                     });
                 }
-                if (undefined !== jqxhr.responseJSON.error) {
-                    entityModalHelper.showFieldsError(jqxhr.responseJSON.error);
-                }
-                if (undefined !== jqxhr.responseJSON.message) {
-                    entityModalHelper.showGeneralError(jqxhr.responseJSON.message);
-                }
-
+                entityModalHelper.handleErrorResponse(jqxhr.responseJSON);
             }).always(() => {
                 entityModalHelper.resumeModal();
             });

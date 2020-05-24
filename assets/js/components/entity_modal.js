@@ -67,5 +67,17 @@ export const entityModalHelper = (() => {
                 $field.addClass('is-invalid');
             }
         },
+        handleErrorResponse: function (response) {
+            if (undefined !== response.message) {
+                this.showGeneralError(response.message);
+            } else if (undefined !== response.error) {
+                this.showFieldsError(response.error);
+            } else {
+                console.error({
+                    log: 'Can not parser response',
+                    response,
+                });
+            }
+        }
     };
 })();
