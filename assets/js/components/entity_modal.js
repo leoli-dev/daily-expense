@@ -44,6 +44,18 @@ export const entityModalHelper = (() => {
             $submitLoadingPlaceholder.hide();
             $submitButton.show();
         },
+        setupFormFields: data => {
+            for (const [name, value] of Object.entries(data)) {
+                const $field = $entityModal.find(`[name="${name}"]`);
+                if (!$field.length) {
+                    continue;
+                }
+                if ($field.is('input')) {
+                    $field.val(value);
+                }
+                // TODO: For other type of field, do something else
+            }
+        },
         setupFormSubmit: callback => {
             $form.unbind();
             $form.submit(e => {

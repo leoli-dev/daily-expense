@@ -59,3 +59,18 @@ app_api_update_currency:
     options:
         expose: true
 
+app_api_add_currency:
+    path: /api/currency
+    controller: App\Controller\Api\CurrencyController::create
+    methods: POST
+    options:
+        expose: true
+
+app_api_delete_currency:
+    path: /api/currency/{id}
+    controller: App\Controller\Api\CurrencyController::delete
+    methods: DELETE
+    requirements:
+        id: '\d+'
+    options:
+        expose: true

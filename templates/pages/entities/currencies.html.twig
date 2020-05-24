@@ -29,18 +29,20 @@
                     </thead>
                     <tbody>
                     {% for currency in currencies %}
-                        <tr data-entity-id="{{ currency.id }}">
-                            <td class="cell-currency-name">{{ currency.name }}</td>
-                            <td class="cell-currency-code">{{ currency.code }}</td>
-                            <td class="cell-currency-symbol">{{ currency.symbol }}</td>
+                        <tr>
+                            <td>{{ currency.name }}</td>
+                            <td>{{ currency.code }}</td>
+                            <td>{{ currency.symbol }}</td>
                             <td class="text-center">
-                                <button class="btn btn-primary btn-icon-split btn-show-edit-modal">
+                                <button class="btn btn-primary btn-icon-split btn-show-edit-modal"
+                                        data-entity-id="{{ currency.id }}">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-edit"></i>
                                     </span>
                                     <span class="text">Edit</span>
                                 </button>
-                                <button class="btn btn-danger btn-icon-split btn-show-delete-modal">
+                                <button class="btn btn-danger btn-icon-split btn-show-delete-modal"
+                                        data-entity-id="{{ currency.id }}">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-ban"></i>
                                     </span>
