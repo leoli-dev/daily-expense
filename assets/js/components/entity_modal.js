@@ -1,27 +1,38 @@
 export const entityModalHelper = (() => {
     const $entityModal = $('#entityModal');
     const $form = $entityModal.find('form');
-    const $title = $entityModal.find('.modal-title');
+    const $modalTitle = $entityModal.find('.modal-title');
+    const $modalBody = $entityModal.find('.modal-body');
+    const $generalError = $modalBody.find('p.text-danger');
     const $submitButton = $entityModal.find('[type="submit"]');
     const $submitLoadingPlaceholder = $entityModal.find('#submitLoadingPlaceholder');
 
     return {
         getModal: () => $entityModal,
         showSpinner: () => {
-            $entityModal.addClass('loading')
+            $modalBody.addClass('loading')
             $submitButton.prop('disabled', true);
         },
         hideSpinner: () => {
-            $entityModal.removeClass('loading');
+            $modalBody.removeClass('loading');
             $submitButton.prop('disabled', false);
         },
         showModal: () => $entityModal.modal('show'),
         hideModal: () => $entityModal.modal('hide'),
+        hideGeneralError: () => $generalError.removeClass('shown'),
+        hideAllInvalidError: () => {
+            $modalBody.find('.is-invalid').removeClass('is-invalid');
+            $modalBody.find('label.text-danger').removeClass('text-danger');
+        },
         showModalWithSpinner: function () {
+            this.hideGeneralError();
+            this.hideAllInvalidError();
             this.showSpinner();
             this.showModal();
         },
-        freezeModal: () => {
+        freezeModal: function () {
+            this.hideGeneralError();
+            this.hideAllInvalidError();
             $entityModal.find('button, input').prop('disabled', true);
             $submitButton.hide();
             $submitLoadingPlaceholder.show();
@@ -38,6 +49,23 @@ export const entityModalHelper = (() => {
                 callback();
             });
         },
-        setTitle: title => $title.html(title),
+        setTitle: title => $modalTitle.html(title),
+        showGeneralError: message => {
+            $generalError.html(`Error: ${message}`);
+            $generalError.addClass('shown');
+        },
+        showFieldsError: error => {
+            for (const [name, message] of Object.entries(error)) {
+                const $field = $modalBody.find(`[name="${name}"]`);
+                if (!$field.length) {
+                    continue;
+                }
+                const $fieldLabel = $modalBody.find(`label[for="${$field.prop('id')}"]`);
+                const $fieldError = $field.siblings('small.text-danger');
+                $fieldLabel.addClass('text-danger');
+                $fieldError.html(message);
+                $field.addClass('is-invalid');
+            }
+        },
     };
 })();

@@ -3,10 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Currency;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-class CurrencyRepository extends ServiceEntityRepository
+class CurrencyRepository extends AbstractRepository
 {
     /**
      * CurrencyRepository constructor.

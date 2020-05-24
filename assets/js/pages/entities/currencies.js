@@ -37,11 +37,20 @@ $('document').ready(() => {
                 $row.find('.cell-currency-symbol').html(data.symbol);
                 entityModalHelper.hideModal();
             }).fail((jqxhr, textStatus, error) => {
-                console.error({
-                    jqxhr,
-                    textStatus,
-                    error,
-                });
+                if (400 !== jqxhr.status) {
+                    console.error({
+                        jqxhr,
+                        textStatus,
+                        error,
+                    });
+                }
+                if (undefined !== jqxhr.responseJSON.error) {
+                    entityModalHelper.showFieldsError(jqxhr.responseJSON.error);
+                }
+                if (undefined !== jqxhr.responseJSON.message) {
+                    entityModalHelper.showGeneralError(jqxhr.responseJSON.message);
+                }
+
             }).always(() => {
                 entityModalHelper.resumeModal();
             });

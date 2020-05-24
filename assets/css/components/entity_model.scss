@@ -1,12 +1,28 @@
 #entityModal {
-    &.loading {
-        .modal-body {
+    .modal-body {
+        &.loading {
             &> div {
                 display: none;
 
                 &.form-spinner {
                     display: flex !important;
                 }
+            }
+        }
+
+        small.text-danger {
+            display: none;
+        }
+
+        input.is-invalid ~ small.text-danger {
+            display: inline;
+        }
+
+        p.text-danger {
+            display: none;
+
+            &.shown {
+                display: block;
             }
         }
     }
