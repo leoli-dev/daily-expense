@@ -1,4 +1,5 @@
 import { entityModalHelper } from '@js/components/entity_modal';
+import ToastHelper from '@js/components/toastr';
 
 $('document').ready(() => {
     const $dataTable = $('.data-table');
@@ -36,14 +37,13 @@ $('document').ready(() => {
                 $row.find('.cell-currency-code').html(data.code);
                 $row.find('.cell-currency-symbol').html(data.symbol);
                 entityModalHelper.hideModal();
+                ToastHelper.displaySuccess(`Currency "${data.name}" has been updated!`);
             }).fail((jqxhr, textStatus, error) => {
-                if (400 !== jqxhr.status) {
-                    console.error({
-                        jqxhr,
-                        textStatus,
-                        error,
-                    });
-                }
+                console.error({
+                    jqxhr,
+                    textStatus,
+                    error,
+                });
                 entityModalHelper.handleErrorResponse(jqxhr.responseJSON);
             }).always(() => {
                 entityModalHelper.resumeModal();
@@ -70,6 +70,7 @@ $('document').ready(() => {
                     textStatus,
                     error,
                 });
+                ToastHelper.displayError('Can not fetch currency data!');
             });
         }
     )

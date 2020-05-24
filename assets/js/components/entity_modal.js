@@ -1,3 +1,5 @@
+import ToastHelper from '@js/components/toastr';
+
 export const entityModalHelper = (() => {
     const $entityModal = $('#entityModal');
     const $form = $entityModal.find('form');
@@ -73,8 +75,9 @@ export const entityModalHelper = (() => {
             } else if (undefined !== response.error) {
                 this.showFieldsError(response.error);
             } else {
+                ToastHelper.displayError('Can not parse response!');
                 console.error({
-                    log: 'Can not parser response',
+                    log: 'Can not parse response',
                     response,
                 });
             }

@@ -21,6 +21,7 @@
     "dependencies": {
         "datatables.net-dt": "^1.10.21",
         "js-cookie": "^2.2.1",
-        "startbootstrap-sb-admin-2": "^4.0.7"
+        "startbootstrap-sb-admin-2": "^4.0.7",
+        "toastr": "^2.1.4"
     }
 }
