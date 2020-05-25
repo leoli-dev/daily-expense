@@ -1,10 +1,11 @@
-import { entityModalHelper } from '@js/components/entity_modal';
+import EntityModalHelper from '@js/components/entity_modal';
+import RemovalModalHelper from '@js/components/removal_modal';
 import ToastHelper from '@js/components/toastr';
 
 $('document').ready(() => {
     const $dataTable = $('.data-table');
     const dataTableObject = $dataTable.DataTable()
-    const $entityModal = entityModalHelper.getModal();
+    const $entityModal = EntityModalHelper.getModal();
     const $inputId = $entityModal.find('[name="id"]');
     const $inputName = $entityModal.find('[name="name"]');
     const $inputCode = $entityModal.find('[name="code"]');
@@ -38,7 +39,7 @@ $('document').ready(() => {
     }
     const editModalSubmitCallback = id => {
         return () => {
-            entityModalHelper.freezeModal();
+            EntityModalHelper.freezeModal();
             const data = getFormFieldsData();
             $.ajax({
                 url: Routing.generate('app_api_update_currency', {id}),
@@ -51,7 +52,7 @@ $('document').ready(() => {
                 $cells.eq(0).html(data.name);
                 $cells.eq(1).html(data.code);
                 $cells.eq(2).html(data.symbol);
-                entityModalHelper.hideModal();
+                EntityModalHelper.hideModal();
                 ToastHelper.displaySuccess(`Currency "${data.name}" has been updated!`);
             }).fail((jqxhr, textStatus, error) => {
                 console.error({
@@ -59,15 +60,15 @@ $('document').ready(() => {
                     textStatus,
                     error,
                 });
-                entityModalHelper.handleErrorResponse(jqxhr.responseJSON);
+                EntityModalHelper.handleErrorResponse(jqxhr.responseJSON);
             }).always(() => {
-                entityModalHelper.resumeModal();
+                EntityModalHelper.resumeModal();
             });
         }
     }
 
     const addModalSubmitCallback = () => {
-        entityModalHelper.freezeModal();
+        EntityModalHelper.freezeModal();
         const data = getFormFieldsData();
         $.ajax({
             url: Routing.generate('app_api_add_currency'),
@@ -84,53 +85,106 @@ $('document').ready(() => {
             const $row = $(rowNode);
             const $cells = $row.find('td');
             $cells.eq(3).addClass('text-center');
-            entityModalHelper.hideModal();
-            ToastHelper.displaySuccess(`Currency "${data.name}" has been create!`);
+            EntityModalHelper.hideModal();
+            ToastHelper.displaySuccess(`Currency "${data.name}" has been created!`);
         }).fail((jqxhr, textStatus, error) => {
             console.error({
                 jqxhr,
                 textStatus,
                 error,
             });
-            entityModalHelper.handleErrorResponse(jqxhr.responseJSON);
+            EntityModalHelper.handleErrorResponse(jqxhr.responseJSON);
         }).always(() => {
-            entityModalHelper.resumeModal();
+            EntityModalHelper.resumeModal();
         });
-    }
+    };
 
-    $('.dataTable').on(
-        'click',
-        'tr > td > button.btn-show-edit-modal',
-        e => {
-            let $button = $(e.target);
-            $button = $button.is('button') ? $button : $button.parents('button');
-            const id = $button.data('entity-id');
-            entityModalHelper.setTitle('Edit Currency');
-            entityModalHelper.showModalWithSpinner();
-            $.getJSON(Routing.generate('app_api_get_currency', {id}), data => {
-                entityModalHelper.setupFormFields(data.currency);
-                entityModalHelper.hideSpinner();
-                entityModalHelper.setupFormSubmit(editModalSubmitCallback(id));
+    const deleteModalConfirmCallback = id => {
+        return () => {
+            RemovalModalHelper.freezeModal();
+            $.ajax({
+                url: Routing.generate('app_api_delete_currency', {id}),
+                method: 'DELETE',
+            }).done(() => {
+                const $btnDelete = $(`.btn-show-delete-modal[data-entity-id="${id}"]`);
+                const $row = $btnDelete.parents('tr');
+                dataTableObject.row($row).remove().draw();
+                ToastHelper.displaySuccess(`Currency has been deleted!`);
             }).fail((jqxhr, textStatus, error) => {
                 console.error({
                     jqxhr,
                     textStatus,
                     error,
                 });
-                ToastHelper.displayError('Can not fetch currency data!');
+                const message = undefined !== jqxhr.responseJSON.message
+                    ? jqxhr.responseJSON.message
+                    : 'Can not remove currency!';
+                ToastHelper.displayError(message);
+            }).always(() => {
+                RemovalModalHelper.resumeModal();
+                RemovalModalHelper.hideModal();
             });
         }
-    );
+    };
+
+    $('.dataTable')
+        .on(
+            'click',
+            'tr > td > button.btn-show-edit-modal',
+            e => {
+                let $button = $(e.target);
+                $button = $button.is('button') ? $button : $button.parents('button');
+                const id = $button.data('entity-id');
+                EntityModalHelper.setTitle('Edit Currency');
+                EntityModalHelper.showModalWithSpinner();
+                $.getJSON(Routing.generate('app_api_get_currency', {id}), data => {
+                    EntityModalHelper.setupFormFields(data.currency);
+                    EntityModalHelper.hideSpinner();
+                    EntityModalHelper.setupFormSubmit(editModalSubmitCallback(id));
+                }).fail((jqxhr, textStatus, error) => {
+                    console.error({
+                        jqxhr,
+                        textStatus,
+                        error,
+                    });
+                    ToastHelper.displayError('Can not fetch currency data!');
+                });
+            }
+        )
+        .on(
+            'click',
+            'tr > td > button.btn-show-delete-modal',
+            e => {
+                let $button = $(e.target);
+                $button = $button.is('button') ? $button : $button.parents('button');
+                const id = $button.data('entity-id');
+                RemovalModalHelper.setTitle('Delete Currency');
+                RemovalModalHelper.showModalWithSpinner();
+                $.getJSON(Routing.generate('app_api_get_currency', {id}), data => {
+                    RemovalModalHelper.setContent(`Are you sure to remove Currency "${data.currency.name}"?`);
+                    RemovalModalHelper.hideSpinner();
+                    RemovalModalHelper.setupConfirm(deleteModalConfirmCallback(id));
+                }).fail((jqxhr, textStatus, error) => {
+                    console.error({
+                        jqxhr,
+                        textStatus,
+                        error,
+                    });
+                    ToastHelper.displayError('Can not fetch currency data!');
+                });
+            }
+        )
+    ;
 
     $btnShotAddModal.click(() => {
-        entityModalHelper.setTitle('Add Currency');
-        entityModalHelper.setupFormFields({
+        EntityModalHelper.setTitle('Add Currency');
+        EntityModalHelper.setupFormFields({
             id: '',
             name: '',
             code: '',
             symbol: '',
         });
-        entityModalHelper.showModal();
-        entityModalHelper.setupFormSubmit(addModalSubmitCallback);
+        EntityModalHelper.showModal();
+        EntityModalHelper.setupFormSubmit(addModalSubmitCallback);
     });
 });

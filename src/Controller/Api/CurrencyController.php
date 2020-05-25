@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Currency;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -105,7 +106,13 @@ class CurrencyController extends AbstractApiController
     {
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($currency);
-        $manager->flush();
+        try {
+            $manager->flush();
+        } catch (ForeignKeyConstraintViolationException $exception) {
+            return $this->responseBadRequestWithMessage(
+                'Delete failed! This currency is still being used by other entity.'
+            );
+        }
 
         return $this->responseSuccessWithNoContent();
     }

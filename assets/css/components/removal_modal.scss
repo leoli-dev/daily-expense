@@ -1,0 +1,21 @@
+#removalModal {
+    .modal-body {
+        &.loading  {
+            &> .form-spinner {
+                display: flex !important;
+            }
+
+            p {
+                display: none;
+            }
+        }
+    }
+
+    .form-spinner.d-flex {
+        display: none !important;
+    }
+
+    .btn-placeholder {
+        display: none;
+    }
+}
