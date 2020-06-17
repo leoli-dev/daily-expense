@@ -1,5 +1,6 @@
 import EntityModalHelper from '@js/components/entity_modal';
 import RemovalModalHelper from '@js/components/removal_modal';
+import generateActionButtons from '@js/components/action_buttons';
 import ToastHelper from '@js/components/toastr';
 
 $('document').ready(() => {
@@ -11,23 +12,6 @@ $('document').ready(() => {
     const $inputCode = $entityModal.find('[name="code"]');
     const $inputSymbol = $entityModal.find('[name="symbol"]');
     const $btnShotAddModal = $('.btn-show-add-modal');
-    const getActionsTemplate = id => {
-        return `
-            <button class="btn btn-primary btn-icon-split btn-show-edit-modal"
-                    data-entity-id="${id}">
-                <span class="icon text-white-50">
-                    <i class="fas fa-edit"></i>
-                </span>
-                <span class="text">Edit</span>
-            </button>
-            <button class="btn btn-danger btn-icon-split btn-show-delete-modal"
-                    data-entity-id="${id}">
-                <span class="icon text-white-50">
-                    <i class="fas fa-ban"></i>
-                </span>
-                <span class="text">Delete</span>
-            </button>`;
-    };
 
     const getFormFieldsData = () => {
         return {
@@ -80,7 +64,7 @@ $('document').ready(() => {
                 currency.name,
                 currency.code,
                 currency.symbol,
-                getActionsTemplate(currency.id),
+                generateActionButtons(currency.id),
             ]).draw(false).node();
             const $row = $(rowNode);
             const $cells = $row.find('td');
