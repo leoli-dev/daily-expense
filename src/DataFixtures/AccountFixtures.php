@@ -21,36 +21,31 @@ class AccountFixtures extends Fixture implements DependentFixtureInterface
         $cadCash
             ->setName('CAD cash')
             ->setCurrency($this->getReference(CurrencyFixtures::CAD))
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+            ->setCreatedAt(new \DateTimeImmutable());
 
         $usdCash = new Account();
         $usdCash
             ->setName('USD cash')
             ->setCurrency($this->getReference(CurrencyFixtures::USD))
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+            ->setCreatedAt(new \DateTimeImmutable());
 
         $eurCash = new Account();
         $eurCash
             ->setName('EUR cash')
             ->setCurrency($this->getReference(CurrencyFixtures::EUR))
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+            ->setCreatedAt(new \DateTimeImmutable());
 
         $hkdCash = new Account();
         $hkdCash
             ->setName('HKD cash')
             ->setCurrency($this->getReference(CurrencyFixtures::HKD))
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+            ->setCreatedAt(new \DateTimeImmutable());
 
         $cnyCash = new Account();
         $cnyCash
             ->setName('CNY cash')
             ->setCurrency($this->getReference(CurrencyFixtures::CNY))
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setCreatedBy($this->getReference(UserFixtures::DEFAULT));
+            ->setCreatedAt(new \DateTimeImmutable());
 
         $manager->persist($cadCash);
         $manager->persist($usdCash);

@@ -36,7 +36,7 @@ class UserFixtures extends Fixture
         $defaultUser = new User();
         $defaultUser
             ->setNickname('Default user')
-            ->setUsername('default')
+            ->setUsername('user')
             ->setPlainPassword('password');
         $defaultUser->setPassword(
             $this->passwordEncoder->encodePassword(

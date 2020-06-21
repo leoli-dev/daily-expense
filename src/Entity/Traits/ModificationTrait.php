@@ -3,7 +3,6 @@
 
 namespace App\Entity\Traits;
 
-use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 trait ModificationTrait
@@ -14,14 +13,6 @@ trait ModificationTrait
      * @var \DateTimeImmutable|null
      */
     protected ?\DateTimeImmutable $modifiedAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="modified_by_id", referencedColumnName="id")
-     *
-     * @var User|null
-     */
-    protected ?User $modifiedBy;
 
     /**
      * @return \DateTimeImmutable|null
@@ -39,26 +30,6 @@ trait ModificationTrait
     public function setModifiedAt(?\DateTimeImmutable $modifiedAt): self
     {
         $this->modifiedAt = $modifiedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return User|null
-     */
-    public function getModifiedBy(): ?User
-    {
-        return $this->modifiedBy;
-    }
-
-    /**
-     * @param User|null $modifiedBy
-     *
-     * @return $this
-     */
-    public function setModifiedBy(?User $modifiedBy): self
-    {
-        $this->modifiedBy = $modifiedBy;
 
         return $this;
     }
