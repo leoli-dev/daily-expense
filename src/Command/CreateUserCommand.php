@@ -113,7 +113,7 @@ class CreateUserCommand extends Command
         $user = new User();
         $user
             ->setUsername(strtolower($username))
-            ->setNickname($nickname)
+            ->setNickname(empty($nickname) ? $username : $nickname)
             ->setPlainPassword($password);
         $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPlainPassword()));
         $this->manager->persist($user);
