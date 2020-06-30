@@ -1,4 +1,12 @@
 {% if sidebarActiveTag is not defined %}{% set sidebarActiveTag = 'dashboard' %}{% endif %}
+{% if sidebarActiveTag == 'categories'
+    or sidebarActiveTag == 'accounts'
+    or sidebarActiveTag == 'owners'
+    or sidebarActiveTag == 'currencies' %}
+    {% set isBaseEntityPageActivated = true %}
+{% else %}
+    {% set isBaseEntityPageActivated = false %}
+{% endif %}
 
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion {% if isSidebarToggled() %}toggled{% endif %}" id="accordionSidebar">
@@ -31,26 +39,17 @@
             <span>Records</span></a>
     </li>
 
-
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item
-    {% if sidebarActiveTag == 'categories'
-        or sidebarActiveTag == 'accounts'
-        or sidebarActiveTag == 'owners'
-        or sidebarActiveTag == 'currencies'
-    %}
-        active
-    {% endif %}
-    ">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+    <li class="nav-item {% if isSidebarToggled() == false and isBaseEntityPageActivated %}active{% endif %}">
+        <a class="nav-link  {% if isBaseEntityPageActivated == false %}collapsed{% endif %}" href="#" data-toggle="collapse" data-target="#collapseTwo"
            aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
             <span>Entities</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse {% if isSidebarToggled() == false and isBaseEntityPageActivated %}show{% endif %}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item {% if sidebarActiveTag == 'accounts' %}active{% endif %}"
                    href="{{ path('app_entity_accounts') }}">

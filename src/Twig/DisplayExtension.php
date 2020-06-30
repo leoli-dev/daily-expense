@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class DisplayExtension extends AbstractExtension

@@ -47,6 +47,7 @@
             </div>
         </li>
 
+        {#
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
@@ -169,13 +170,14 @@
         </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>
+        #}
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    {{ app.user.nickname is not null ? app.user.nickname : app.user.username }}
+                    {{ app.user.nickname|capitalize }}
                 </span>
             </a>
             <!-- Dropdown - User Information -->
