@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AccountRepository")
  */
-class Account
+class Account implements \JsonSerializable
 {
     use CreationTrait;
     use ModificationTrait;
@@ -82,5 +82,14 @@ class Account
         $this->currency = $currency;
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'currency' => $this->currency,
+        ];
     }
 }

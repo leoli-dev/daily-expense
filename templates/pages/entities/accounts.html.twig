@@ -39,6 +39,16 @@
             </div>
         </div>
     </div>
+
+    {% embed 'components/_entity_modal.html.twig' %}
+        {% block formFields %}
+            {% include 'components/_form_fields.html.twig' with {
+                'fields': getAccountFieldsData(),
+            } only %}
+        {% endblock %}
+    {% endembed %}
+
+    {% include 'components/_removal_modal.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}

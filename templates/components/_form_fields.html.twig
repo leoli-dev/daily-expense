@@ -13,11 +13,35 @@
                     class="form-control"
                     id="{{ 'input' ~ field.name|title }}"
                     value=""
-                    {% if field.required is defined and field.required == true -%}
+                    {% if field.required is defined and field.required -%}
                         required
                     {%- endif -%}
                 >
                 <small class="text-danger"></small>
+            </div>
+        </div>
+    {% elseif 'select' == field.type %}
+        <div class="form-group row">
+            <label for="{{ 'select' ~ field.name|title }}" class="col-sm-2 col-form-label">
+                {{ field.name|title }}
+            </label>
+            <div class="col-sm-10">
+                <select
+                    name="{{ field.name }}"
+                    class="form-control"
+                    id="{{ 'select' ~ field.name|title }}"
+                    {% if field.required is defined and field.required -%}
+                        required
+                    {%- endif -%}
+                >
+                    {% for option in field.options %}
+                        <option value="{{ option.value }}"
+                            {% if option.disabled is defined and option.disabled %}disabled{% endif %}
+                        >
+                            {{ option.content }}
+                        </option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
     {% endif %}

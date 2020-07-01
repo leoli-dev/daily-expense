@@ -11,7 +11,7 @@ $('document').ready(() => {
     const $inputName = $entityModal.find('[name="name"]');
     const $inputCode = $entityModal.find('[name="code"]');
     const $inputSymbol = $entityModal.find('[name="symbol"]');
-    const $btnShotAddModal = $('.btn-show-add-modal');
+    const $btnShowAddModal = $('.btn-show-add-modal');
 
     const getFormFieldsData = () => {
         return {
@@ -21,6 +21,7 @@ $('document').ready(() => {
             symbol: $inputSymbol.val(),
         };
     }
+
     const editModalSubmitCallback = id => {
         return () => {
             EntityModalHelper.freezeModal();
@@ -160,7 +161,7 @@ $('document').ready(() => {
         )
     ;
 
-    $btnShotAddModal.click(() => {
+    $btnShowAddModal.click(() => {
         EntityModalHelper.setTitle('Add Currency');
         EntityModalHelper.setupFormFields({
             id: '',

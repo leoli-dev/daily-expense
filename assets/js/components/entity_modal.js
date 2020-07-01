@@ -45,12 +45,21 @@ export default {
     },
     setupFormFields: data => {
         for (const [name, value] of Object.entries(data)) {
+            console.log({name, value})
+
             const $field = $modal.find(`[name="${name}"]`);
             if (!$field.length) {
                 continue;
             }
             if ($field.is('input')) {
                 $field.val(value);
+            }
+            if ($field.is('select')) {
+                if (undefined !== value.id ) {
+                    $field.val(`${value.id}`);
+                } else {
+                    $field.find('option:eq(0)').prop('selected', true);
+                }
             }
             // TODO: For other type of field, do something else
         }

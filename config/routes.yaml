@@ -74,3 +74,37 @@ app_api_delete_currency:
         id: '\d+'
     options:
         expose: true
+
+app_api_get_account:
+    path: /api/account/{id}
+    controller: App\Controller\Api\AccountController::fetch
+    methods: GET
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+
+app_api_update_account:
+    path: /api/account/{id}
+    controller: App\Controller\Api\AccountController::update
+    methods: PUT
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+
+app_api_add_account:
+    path: /api/account
+    controller: App\Controller\Api\AccountController::create
+    methods: POST
+    options:
+        expose: true
+
+app_api_delete_account:
+    path: /api/account/{id}
+    controller: App\Controller\Api\AccountController::delete
+    methods: DELETE
+    requirements:
+        id: '\d+'
+    options:
+        expose: true

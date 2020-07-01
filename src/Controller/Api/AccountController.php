@@ -2,58 +2,61 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Account;
 use App\Entity\Currency;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class CurrencyController extends AbstractApiController
+class AccountController extends AbstractApiController
 {
     /**
-     * @param Currency $currency
+     * @param Account $account
      *
      * @return JsonResponse
      */
-    public function fetch(Currency $currency): JsonResponse
+    public function fetch(Account $account): JsonResponse
     {
-        return $this->json(['currency' => $currency]);
+        return $this->json(['account' => $account]);
     }
 
     /**
-     * @param Request  $request
-     * @param Currency $currency
+     * @param Request $request
+     * @param Account $account
      *
      * @return JsonResponse
      */
     public function update(
         Request $request,
-        Currency $currency
+        Account $account
     ): JsonResponse {
         $data = json_decode($request->getContent(), true);
-        if (!isset($data['name']) || !isset($data['code']) || !isset($data['symbol'])) {
+        if (!isset($data['name'])
+            || !isset($data['currency'])
+            || 0 === $currencyId = intval($data['currency'])) {
             return $this->responseBadRequestWithMessage('Invalid parameters.');
         }
 
-        $name = $data['name'];
-        $code = $data['code'];
-        $symbol = $data['symbol'];
         $manager = $this->getDoctrine()->getManager();
         $currencyRepo = $manager->getRepository(Currency::class);
-        $error = [];
-        if (!$currencyRepo->checkUniqueFieldConflict('name', $name, $currency->getId())) {
-            $error['name'] = sprintf('Currency with name "%s" exists already.', $name);
+        $currency = $currencyRepo->find($currencyId);
+        if (!$currency instanceof Currency) {
+            return $this->responseBadRequestWithMessage('Invalid parameters.');
         }
-        if (!$currencyRepo->checkUniqueFieldConflict('code', $code, $currency->getId())) {
-            $error['code'] = sprintf('Currency with code "%s" exists already.', $code);
+
+        $error = [];
+        $name = $data['name'];
+        if (!$currencyRepo->checkUniqueFieldConflict('name', $name, $account->getId())) {
+            $error['name'] = sprintf('Account with name "%s" exists already.', $name);
         }
         if (!empty($error)) {
             return $this->responseBadRequestWithErrorDetail($error);
         }
 
-        $currency
+        $account
             ->setName($name)
-            ->setCode($code)
-            ->setSymbol($symbol);
+            ->setCurrency($currency)
+            ->setModifiedAt(new \DateTimeImmutable());
         $manager->flush();
 
         return $this->responseSuccessWithNoContent();
@@ -67,51 +70,53 @@ class CurrencyController extends AbstractApiController
     public function create(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        if (!isset($data['name']) || !isset($data['code']) || !isset($data['symbol'])) {
+        if (!isset($data['name'])
+            || !isset($data['currency'])
+            || 0 === $currencyId = intval($data['currency'])) {
             return $this->responseBadRequestWithMessage('Invalid parameters.');
         }
 
-        $name = $data['name'];
-        $code = $data['code'];
-        $symbol = $data['symbol'];
         $manager = $this->getDoctrine()->getManager();
         $currencyRepo = $manager->getRepository(Currency::class);
-        $error = [];
-        if (!$currencyRepo->checkUniqueFieldConflict('name', $name)) {
-            $error['name'] = sprintf('Currency with name "%s" exists already.', $name);
+        $currency = $currencyRepo->find($currencyId);
+        if (!$currency instanceof Currency) {
+            return $this->responseBadRequestWithMessage('Invalid parameters.');
         }
-        if (!$currencyRepo->checkUniqueFieldConflict('code', $code)) {
-            $error['code'] = sprintf('Currency with code "%s" exists already.', $code);
+
+        $error = [];
+        $name = $data['name'];
+        if (!$currencyRepo->checkUniqueFieldConflict('name', $name)) {
+            $error['name'] = sprintf('Account with name "%s" exists already.', $name);
         }
         if (!empty($error)) {
             return $this->responseBadRequestWithErrorDetail($error);
         }
 
-        $currency = new Currency();
-        $currency
+        $account = new Account();
+        $account
             ->setName($name)
-            ->setCode($code)
-            ->setSymbol($symbol);
-        $manager->persist($currency);
+            ->setCurrency($currency)
+            ->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($account);
         $manager->flush();
 
-        return $this->json(['currency' => $currency]);
+        return $this->json(['account' => $account]);
     }
 
     /**
-     * @param Currency $currency
+     * @param Account $account
      *
      * @return JsonResponse
      */
-    public function delete(Currency $currency): JsonResponse
+    public function delete(Account $account): JsonResponse
     {
         $manager = $this->getDoctrine()->getManager();
-        $manager->remove($currency);
+        $manager->remove($account);
         try {
             $manager->flush();
         } catch (ForeignKeyConstraintViolationException $exception) {
             return $this->responseBadRequestWithMessage(
-                'Delete failed! This currency is still being used by other entity.'
+                'Delete failed! This account is still being used by other entity.'
             );
         }
 
