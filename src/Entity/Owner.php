@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class Owner
+class Owner implements \JsonSerializable
 {
     use CreationTrait;
     use ModificationTrait;
@@ -22,7 +22,7 @@ class Owner
     private int $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      *
      * @var string
      */
@@ -81,5 +81,17 @@ class Owner
         $this->icon = $icon;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'icon' => $this->icon,
+        ];
     }
 }
