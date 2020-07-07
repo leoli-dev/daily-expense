@@ -8,6 +8,13 @@ const $generalError = $modalBody.find('p.text-danger');
 const $submitButton = $modal.find('[type="submit"]');
 const $submitLoadingPlaceholder = $modal.find('#submitLoadingPlaceholder');
 
+const setupRadioField = ($radios, value) => {
+    $radios.each((key, radio) => {
+        const $radio = $(radio);
+        $radio.prop('checked', value === $radio.val());
+    });
+};
+
 export default {
     getModal: () => $modal,
     showSpinner: () => {
@@ -45,14 +52,16 @@ export default {
     },
     setupFormFields: data => {
         for (const [name, value] of Object.entries(data)) {
-            console.log({name, value})
-
-            const $field = $modal.find(`[name="${name}"]`);
+            let $field = $modal.find(`[name="${name}"]`);
             if (!$field.length) {
                 continue;
             }
             if ($field.is('input')) {
-                $field.val(value);
+                if ('radio' !== $field.prop('type')) {
+                    $field.val(value);
+                } else {
+                    setupRadioField($field, value);
+                }
             }
             if ($field.is('select')) {
                 if (undefined !== value.id ) {

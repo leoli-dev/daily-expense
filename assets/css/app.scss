@@ -21,6 +21,12 @@ body {
     fill: white;
 }
 
-.dataTable > tbody tr:hover {
-    background-color: whitesmoke !important;
+.dataTable {
+    &> tbody tr:hover {
+        background-color: whitesmoke !important;
+    }
+
+    td > i {
+        font-size: 25px;
+    }
 }

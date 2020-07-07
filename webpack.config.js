@@ -28,6 +28,7 @@ Encore
     .addEntry('pages/login', './assets/css/pages/login.scss')
     .addEntry('pages/entities/accounts', './assets/js/pages/entities/accounts.js')
     .addEntry('pages/entities/currencies', './assets/js/pages/entities/currencies.js')
+    .addEntry('pages/entities/owners', './assets/js/pages/entities/owners.js')
 
     /*
      * Copy js dependencies libraries

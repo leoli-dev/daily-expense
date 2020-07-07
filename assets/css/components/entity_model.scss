@@ -25,6 +25,14 @@
                 display: block;
             }
         }
+
+        .form-check-inline {
+            padding: 7px 12px;
+
+            label {
+                font-size: 25px;
+            }
+        }
     }
 
     .form-spinner.d-flex {

@@ -44,5 +44,23 @@
                 </select>
             </div>
         </div>
+    {% elseif 'selectIcon' == field.type %}
+        <div class="form-group row">
+            <label for="{{ 'select' ~ field.name|title }}" class="col-sm-2 col-form-label">
+                {{ field.name|title }}
+            </label>
+            <div class="col-sm-10">
+                {% for key, option in field.options %}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{ field.name }}"
+                               id="{{ 'radio' ~ field.name|title ~ key }}" value="{{ option.value }}"
+                               {% if key == 0 %}required{% endif %}>
+                        <label class="form-check-label" for="{{ 'radio' ~ field.name|title ~ key }}">
+                            <i class="fas {{ option.value }}"></i>
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     {% endif %}
 {% endfor %}

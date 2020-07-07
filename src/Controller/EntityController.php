@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Entity\Currency;
+use App\Entity\Owner;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,7 +39,15 @@ class EntityController extends AbstractController
      */
     public function owners(): Response
     {
-        return $this->render('pages/entities/owners.html.twig');
+        $ownerRepo = $this->getDoctrine()->getRepository(Owner::class);
+        $owners = $ownerRepo->findAll();
+
+        return $this->render(
+            'pages/entities/owners.html.twig',
+            [
+                'owners' => $owners,
+            ]
+        );
     }
 
     /**

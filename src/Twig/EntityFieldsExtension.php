@@ -32,6 +32,7 @@ class EntityFieldsExtension extends AbstractExtension
         return [
             new TwigFunction('getCurrencyFieldsData', [$this, 'getCurrencyFieldsData']),
             new TwigFunction('getAccountFieldsData', [$this, 'getAccountFieldsData']),
+            new TwigFunction('getOwnerFieldsData', [$this, 'getOwnerFieldsData']),
         ];
     }
 
@@ -106,6 +107,43 @@ class EntityFieldsExtension extends AbstractExtension
                     ],
                     $options
                 ),
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getOwnerFieldsData(): array
+    {
+        return [
+            [
+                'name' => 'id',
+                'type' => 'hidden',
+            ],
+            [
+                'name' => 'name',
+                'type' => 'text',
+                'required' => true,
+            ],
+            [
+                'name' => 'icon',
+                'type' => 'selectIcon',
+                'required' => true,
+                'options' => [
+                    [
+                        'value' => 'fa-female',
+                    ],
+                    [
+                        'value' => 'fa-male',
+                    ],
+                    [
+                        'value' => 'fa-user-friends',
+                    ],
+                    [
+                        'value' => 'fa-cat',
+                    ],
+                ],
             ],
         ];
     }

@@ -108,3 +108,37 @@ app_api_delete_account:
         id: '\d+'
     options:
         expose: true
+
+app_api_get_owner:
+    path: /api/owner/{id}
+    controller: App\Controller\Api\OwnerController::fetch
+    methods: GET
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+
+app_api_update_owner:
+    path: /api/owner/{id}
+    controller: App\Controller\Api\OwnerController::update
+    methods: PUT
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+
+app_api_add_owner:
+    path: /api/owner
+    controller: App\Controller\Api\OwnerController::create
+    methods: POST
+    options:
+        expose: true
+
+app_api_delete_owner:
+    path: /api/owner/{id}
+    controller: App\Controller\Api\OwnerController::delete
+    methods: DELETE
+    requirements:
+        id: '\d+'
+    options:
+        expose: true

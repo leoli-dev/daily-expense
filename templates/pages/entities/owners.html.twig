@@ -4,4 +4,59 @@
 {% extends 'pages/layout.html.twig' %}
 
 {% block pageContent %}
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="row text-right">
+                    <div class="col">
+                        <button class="btn btn-success btn-icon-split mb-4 btn-show-add-modal">
+                            <span class="icon text-white-50">
+                              <i class="fas fa-plus"></i>
+                            </span>
+                            <span class="text">Add Owner</span>
+                        </button>
+                    </div>
+                </div>
+                <table class="table table-bordered data-table" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Icon</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for owner in owners %}
+                        <tr>
+                            <td>{{ owner.name }}</td>
+                            <td>
+                                {% if owner.icon is not null %}
+                                    <i class="fas {{ owner.icon }}"></i>
+                                {% endif %}
+                            </td>
+                            {% include 'components/_actions_cell.html.twig' with { 'id': owner.id } only %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% embed 'components/_entity_modal.html.twig' %}
+        {% block formFields %}
+            {% include 'components/_form_fields.html.twig' with {
+                'fields': getOwnerFieldsData(),
+            } only %}
+        {% endblock %}
+    {% endembed %}
+
+    {% include 'components/_removal_modal.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('pages/entities/owners') }}
 {% endblock %}
