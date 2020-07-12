@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Traits\CreationTrait;
+use App\Entity\Traits\FlowTypeTrait;
 use App\Entity\Traits\ModificationTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,15 +14,7 @@ class Record
 {
     use CreationTrait;
     use ModificationTrait;
-
-    public const FLOW_TYPE_INCOME = 0;
-    public const FLOW_TYPE_EXPENSE = 1;
-    public const FLOW_TYPE_TRANSFER = 2;
-    public const FLOW_TYPES = [
-        'income'    => self::FLOW_TYPE_INCOME,
-        'expense'   => self::FLOW_TYPE_EXPENSE,
-        'transfer'  => self::FLOW_TYPE_TRANSFER,
-    ];
+    use FlowTypeTrait;
 
     /**
      * @ORM\Id()
@@ -36,13 +29,6 @@ class Record
      * @var float
      */
     private float $amount;
-
-    /**
-     * @ORM\Column(type="smallint")
-     *
-     * @var int
-     */
-    private int $flowType;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -106,32 +92,6 @@ class Record
     public function setAmount(float $amount): Record
     {
         $this->amount = $amount;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFlowType(): int
-    {
-        return $this->flowType;
-    }
-
-    /**
-     * @param int $flowType
-     *
-     * @return Record
-     */
-    public function setFlowType(int $flowType): Record
-    {
-        if (!in_array($flowType, self::FLOW_TYPES)) {
-            throw new \LogicException(
-                sprintf('Invalid Flow Type: %d', $flowType)
-            );
-        }
-
-        $this->flowType = $flowType;
 
         return $this;
     }

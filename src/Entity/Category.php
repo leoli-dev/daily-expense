@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Traits\CreationTrait;
+use App\Entity\Traits\FlowTypeTrait;
 use App\Entity\Traits\ModificationTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,6 +15,7 @@ class Category implements \JsonSerializable
 {
     use CreationTrait;
     use ModificationTrait;
+    use FlowTypeTrait;
 
     /**
      * @ORM\Id()
@@ -158,6 +160,7 @@ class Category implements \JsonSerializable
             'parent' => $this->parent,
             'name' => $this->name,
             'icon' => $this->icon,
+            'flowType' => $this->flowType,
         ];
     }
 }
