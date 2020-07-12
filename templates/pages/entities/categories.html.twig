@@ -4,4 +4,38 @@
 {% extends 'pages/layout.html.twig' %}
 
 {% block pageContent %}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="row text-right">
+                    <div class="col">
+                        <button class="btn btn-success btn-icon-split mb-4 btn-show-add-modal">
+                            <span class="icon text-white-50">
+                              <i class="fas fa-plus"></i>
+                            </span>
+                            <span class="text">Add Category</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% embed 'components/_entity_modal.html.twig' %}
+        {% block formFields %}
+            {#
+            {% include 'components/_form_fields.html.twig' with {
+                'fields': getCurrencyFieldsData(),
+            } only %}
+            #}
+        {% endblock %}
+    {% endembed %}
+
+    {% include 'components/_removal_modal.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{#    {{ encore_entry_script_tags('pages/entities/currencies') }}#}
 {% endblock %}

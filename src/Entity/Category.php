@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-class Category
+class Category implements \JsonSerializable
 {
     use CreationTrait;
     use ModificationTrait;
@@ -36,6 +36,20 @@ class Category
      * @var ArrayCollection
      */
     private ArrayCollection $children;
+
+    /**
+     * @ORM\Column(type="string", unique=true)
+     *
+     * @var string
+     */
+    private string $name;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    private ?string $icon;
 
     /**
      * Category constructor.
@@ -83,6 +97,46 @@ class Category
     }
 
     /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Category
+     */
+    public function setName(string $name): Category
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param string|null $icon
+     *
+     * @return Category
+     */
+    public function setIcon(?string $icon): Category
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
      * @param ArrayCollection $children
      *
      * @return Category
@@ -92,5 +146,18 @@ class Category
         $this->children = $children;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'parent' => $this->parent,
+            'name' => $this->name,
+            'icon' => $this->icon,
+        ];
     }
 }
