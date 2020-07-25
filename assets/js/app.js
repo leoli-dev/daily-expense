@@ -1,5 +1,5 @@
-import '../css/app.scss';
-import '../css/global.scss';
+import '@css/app.scss';
+import '@css/global.scss';
 import Cookies from 'js-cookie';
 
 const $ = require('jquery');

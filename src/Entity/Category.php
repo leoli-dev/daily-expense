@@ -85,6 +85,10 @@ class Category implements \JsonSerializable
      */
     public function setParent(?Category $parent): Category
     {
+        if ($parent->getParent() instanceof Category) {
+            throw new \LogicException('Sub-category can not be a parent category!');
+        }
+
         $this->parent = $parent;
 
         return $this;
