@@ -16,15 +16,11 @@ RUN apt-get install -y \
         libmcrypt-dev \
         sudo \
         unzip \
-        default-mysql-client \
-        default-libmysqlclient-dev
+        redis-tools
 
 RUN docker-php-ext-install \
         opcache \
         intl \
-        mysqli \
-        pdo \
-        pdo_mysql \
         zip \
         pcntl \
         bcmath
@@ -34,14 +30,14 @@ RUN pecl install xdebug-2.9.0 && \
     docker-php-ext-enable xdebug
 
 # Composer
-RUN php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/local/bin --filename=composer                               \
+RUN php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/local/bin --filename=composer \
     && chmod +x /usr/local/bin/composer
 
 # Install newsest Nodejs, gulp and yarn
-RUN apt-get -y install curl dirmngr apt-transport-https lsb-release ca-certificates     \
+RUN apt-get -y install curl                                                             \
     && curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -                  \
     && apt-get -y install nodejs                                                        \
-    && apt-get -y  install gcc g++ make                                                 \
+    && apt-get -y install gcc g++ make                                                  \
     && node --version                                                                   \
     && npm --version                                                                    \
     && npm install --g gulp-cli                                                         \

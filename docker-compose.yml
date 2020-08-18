@@ -1,38 +1,28 @@
 version: '3.5'
 
 services:
-    nginx:
+    front:
         image: nginx:latest
-        container_name: nginx
+        container_name: front
         restart: always
         ports:
             - 8090:80
         volumes:
             - .:/var/www:cached
-            - ./config/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
+            - ./config/docker/front/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
         working_dir: /var/www
         depends_on:
-            - php
-            - db
+            - engine
+            - redis
 
-    php:
-        build: ./config/docker/php/
-        container_name: php
+    engine:
+        build: config/docker/engine/
+        container_name: engine
         restart: always
         volumes:
             - .:/var/www:cached
         working_dir: /var/www
 
-    db:
-        image: mariadb:latest
-        container_name: db
-        restart: always
-        environment:
-            MYSQL_DATABASE: daily_expense
-            MYSQL_USER: user
-            MYSQL_PASSWORD: password
-            MYSQL_ROOT_PASSWORD: password
-        ports:
-            - 8091:3306
-        volumes:
-            - ./data/db_storage:/var/lib/mysql
+    redis:
+        image: redis:5.0
+        container_name: redis
