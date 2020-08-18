@@ -26,3 +26,7 @@ services:
     redis:
         image: redis:5.0
         container_name: redis
+        restart: always
+        volumes:
+            - ./data/cache/redis:/data
+            - ./config/docker/redis.conf:/usr/local/etc/redis/redis.conf
