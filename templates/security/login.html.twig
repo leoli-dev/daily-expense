@@ -14,11 +14,9 @@
     <div class="text-center">
         <form class="form-signin" method="post">
             {% if error %}
-                <div class="alert alert-danger">
-                    {{ error.messageKey|trans(error.messageData, 'security') }}
-                </div>
+                <div class="alert alert-danger">{{ error }}</div>
             {% endif %}
-            {% include 'partials/_logo.svg.twig' %}
+            {% include 'components/_logo.svg.twig' %}
             <h1 class="h1 mb-3 font-weight-normal">Daily Expense</h1>
             <label for="inputUsername" class="sr-only">Username</label>
             <input type="text" id="inputUsername" class="form-control" name="username"
@@ -26,17 +24,6 @@
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control" name="password"
                    placeholder="Password" required autocomplete="off">
-
-            {# TODO: activate "remember me" later
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me">
-                    Remember me
-                </label>
-            </div>
-            #}
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <button class="btn btn-lg btn-primary btn-block" type="submit">
                 Sign in
             </button>
