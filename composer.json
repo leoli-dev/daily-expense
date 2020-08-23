@@ -6,7 +6,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "backup-manager/symfony": "^3.0",
         "friendsofsymfony/jsrouting-bundle": "^2.5",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/console": "^5.0.7",
@@ -18,8 +17,7 @@
         "symfony/security-bundle": "^5.0.7",
         "symfony/twig-pack": "^1.0",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "^5.0.7",
-        "vich/uploader-bundle": "^1.13"
+        "symfony/yaml": "^5.0.7"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
