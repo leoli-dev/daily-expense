@@ -11,8 +11,7 @@
 
 ###> docker
 docker-compose.yml
-/data/db_backup
-/data/db_storage
+/data/cache/redis
 ###< docker
 
 ###> symfony/webpack-encore-bundle ###
